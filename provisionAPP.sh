@@ -9,9 +9,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
 # install nginx
 sudo DEBIAN_FRONTEND=noninteractive apt-get install nginx -y
 
-# install pm2
-sudo npm install -g pm2
-
 # download noadjs shell script
 curl -fsSL https://deb.nodesource.com/setup_20.x -o setup_nodejs.sh
 
@@ -22,6 +19,7 @@ sudo DEBIAN_FRONTEND=noninteractive bash setup_nodejs.sh
 sudo DEBIAN_FRONTEND=noninteractive apt-get install nodejs -y
 
 # export DB connection
+echo "export DB_HOST=mongodb://10.0.3.4:27017/posts" >> ~/.bashrc
 export DB_HOST=mongodb://10.0.3.4:27017/posts
 
 # setup reverse proxy
@@ -32,6 +30,9 @@ sudo systemctl restart nginx
 
 # clone app repo
 git clone https://github.com/daraymonsta/tech201-sparta-app /repo
+
+#install pm2 using npm
+sudo npm install -g pm2
 
 # install npm
 cd /repo/app

@@ -298,6 +298,7 @@ This guide outlines the steps to create reusable generalised images of two VMs (
 
 ```bash
 #!/bin/bash
+echo "export DB_HOST=mongodb://10.0.3.4:27017/posts" >> ~/.bashrc
 export DB_HOST=mongodb://10.0.3.4:27017/posts
 
 cd /repo/app
