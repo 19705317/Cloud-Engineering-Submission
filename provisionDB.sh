@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 # update vm packages
 sudo apt update -y
@@ -20,21 +20,13 @@ sudo apt-get update
 # download specific version of mongoDB
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y mongodb-org=7.0.6 mongodb-org-database=7.0.6 mongodb-org-server=7.0.6 mongodb-mongosh mongodb-org-mongos=7.0.6 mongodb-org-tools=7.0.6
 
-# prevent mongdb package from upgrading
-echo "mongodb-org hold" | sudo dpkg --set-selections
-echo "mongodb-org-database hold" | sudo dpkg --set-selections
-echo "mongodb-org-server hold" | sudo dpkg --set-selections
-echo "mongodb-mongosh hold" | sudo dpkg --set-selections
-echo "mongodb-org-mongos hold" | sudo dpkg --set-selections
-echo "mongodb-org-tools hold" | sudo dpkg --set-selections
-
 # change config of mongod local ip to default gateway
 sudo sed -i.bak 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf 
 
 # restart mongoDB to change configuration
 sudo systemctl restart mongod
 
-# fix permission for sock file
+# manually delete 27017 from sock file due to permission issues
 sudo rm -rf /tmp/mongodb-27017.sock
 
 # enable mongodb

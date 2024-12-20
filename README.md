@@ -201,9 +201,6 @@ sudo systemctl enable mongod: Configures MongoDB to start automatically whenever
     # install nginx
     sudo DEBIAN_FRONTEND=noninteractive apt-get install nginx -y
 
-    # install pm2
-    sudo npm install -g pm2
-
     # download noadjs shell script
     curl -fsSL https://deb.nodesource.com/setup_20.x -o setup_nodejs.sh
 
@@ -224,6 +221,9 @@ sudo systemctl enable mongod: Configures MongoDB to start automatically whenever
 
     # clone app repo
     git clone https://github.com/daraymonsta/tech201-sparta-app /repo
+
+    # install pm2
+    sudo npm install -g pm2
 
     # install npm
     cd /repo/app
